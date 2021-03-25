@@ -122,6 +122,9 @@ def load_environment(conf):
     # load all CKAN plugins
     p.load_all()
 
+    if not p.plugin_loaded('managed_search_schema'):
+        search.check_solr_schema_version()
+
     # Check Redis availability
     if not is_redis_available():
         log.critical('Could not connect to Redis.')
